@@ -69,42 +69,47 @@ const Home = () => {
   const displaySearchResults = () => {
     if (results) {
       if (typeof results === "object") {
-        return <Results results={results} />;
+        return (
+          <div className="w-3/5">
+            <Results results={results} />
+          </div>
+        );
       } else {
-        return <p>{results}</p>;
+        return (
+          <p className="rounded border-black border-2 bg-white bg-opacity-50 p-2 w-1/3">
+            {results}
+          </p>
+        );
       }
     } else {
       return (
-        <div className="rounded border-black w-4/5 md:w-1/3">
-          <p className="text-xs md:text-2xl">
-            Welcome to the Angel Recipe App. Do you never know what to cook for
-            dinner? Tired of cooking the same old bland dinners? Can't find a
-            good recipe to fit your dietary needs? Well you've come to the right
-            place. For the Recipe Angles to save you, we're going to need you to
-            use the search bar above.
-          </p>
-        </div>
+        <p className="text-2xl rounded border-black border-2 bg-white bg-opacity-50 p-2 w-1/3">
+          Welcome to the Angel Recipe App. Do you never know what to cook for
+          dinner? Tired of cooking the same old bland meals? Can't find a good
+          recipe to fit your dietary needs? Well you've come to the right place.
+          For the Recipe Angels to save you, we're going to need you to use the
+          search bar above. Data is retrieved from
+          developer.edamam.com/edamam-recipe-api
+        </p>
       );
     }
   };
 
   return (
-    <div id="home" className="flex flex-col justify-center items-center">
+    <div id="home" className="flex flex-col justify-center items-center w-full">
       <form
-        className="flex flex-row justify-between items-center w-1/3"
+        className="flex flex-row justify-between items-center mb-8 m-auto"
         onSubmit={getRecipes}
       >
-        <div>
-          <input
-            className="rounded-sm border-black text-sm p-2"
-            type="text"
-            placeholder="Ingredient"
-            onChange={updateSearch}
-          />
-        </div>
+        <input
+          className="rounded-sm bg-white bg-opacity-50 border-black p-2 flex flex-row justify-between items-center"
+          type="text"
+          placeholder="Ingredient"
+          onChange={updateSearch}
+        />
         <select
           id="diet"
-          className="rounded-sm border-black text-sm py-2 pr-8"
+          className="rounded-sm bg-white bg-opacity-50 border-black py-2 pr-8 flex flex-row justify-between items-center"
           value={diet}
           onChange={updateDiet}
           required
@@ -120,7 +125,7 @@ const Home = () => {
         </select>
         <select
           id="allergy"
-          className="rounded-sm border-black text-sm py-2 pr-8"
+          className="rounded-sm bg-white bg-opacity-50 border-black py-2 pr-8 flex flex-row justify-between items-center"
           value={allergy}
           onChange={updateAllergy}
           required
@@ -137,13 +142,13 @@ const Home = () => {
           <option value="vegetarian">Vegetarian</option>
         </select>
         <button
-          className="bg-white hover:bg-blue-500 hover:text-white p-1.5 border border-black rounded-sm"
+          className="bg-white hover:bg-blue-500 bg-white bg-opacity-100 hover:text-white p-2 border border-black rounded-sm"
           type="submit"
         >
           Search
         </button>
       </form>
-      <>{displaySearchResults()}</>
+      {displaySearchResults()}
     </div>
   );
 };
