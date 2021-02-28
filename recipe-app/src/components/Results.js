@@ -1,5 +1,4 @@
 import React from "react";
-import "./Results.css";
 
 const Results = (props) => {
   const resultsDisplay = () => {
@@ -7,28 +6,23 @@ const Results = (props) => {
       let recipes = props.results.data.hits;
       return recipes.map((item) => {
         return (
-          <div className="card" style={{ width: "98%" }}>
-            <img
-              className="card-img-top"
-              src={item.recipe.image}
-              alt={item.recipe.label}
-              style={{ width: "100%" }}
-            />
-            <div className="card-body">
-              <h4 className="card-title">{item.recipe.label}</h4>
-              <p className="card-text">
+          <div className="recipe-container">
+            <div className="left-side">
+              <img src={item.recipe.image} alt={item.recipe.label} />
+              <h4>{item.recipe.label}</h4>
+              <p>
                 <b>Calories:</b>{" "}
                 {Math.round(item.recipe.calories).toLocaleString("en")}
               </p>
-              <p className="card-text">
+              <p>
                 <b>Allergy Notes: </b>{" "}
                 <ul>
                   {item.recipe.healthLabels.map((ingredient) => {
                     return <li>{ingredient}</li>;
                   })}
                 </ul>
-              </p>
-              <p className="card-text">
+              </p>{" "}
+              <p>
                 <b>Dietary Cautions: </b>{" "}
                 <ul>
                   {item.recipe.cautions.length ? (
@@ -40,8 +34,22 @@ const Results = (props) => {
                   )}
                 </ul>
               </p>
-              <a href="#" className="btn btn-primary">
-                See Recipe
+            </div>
+            <div className="right-side">
+              <h4>Ingredients</h4>
+              <ul>
+                {item.recipe.ingredients.map((item) => {
+                  return <li>{item.text}</li>;
+                })}
+              </ul>
+              <a
+                href={`https://www.youtube.com/results?search_query=how+to+make+${encodeURIComponent(
+                  item.recipe.label
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                How to make {item.recipe.label}
               </a>
             </div>
           </div>
